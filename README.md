@@ -20,4 +20,7 @@ Si se ingresa un usuario no válido el script devuelve `0`, lo que indica una au
 
 Finalmente, si se intenta una inyección SQL como `' or 1=1 --`, el script aún devuelve `0`. Esto demuestra que la consulta está correctamente parametrizada y que la vulnerabilidad de inyección SQL está ausente.
 
-
+## Prueba 2: Cross Site Scripting
+El segundo script crea un payload con un script que dentro contiene la funcion de Javascript 'alert()'. Si el payload esta dentro de la respuesta del request, significa que se pudo hacer un Cross Site Script.
+<br>
+Si la la respuesta no contiene el payload, no se pudo realizar el Cross Site Script. 
