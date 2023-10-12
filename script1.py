@@ -1,7 +1,17 @@
 import requests
 import json
+import sys
 
-url = 'http://localhost:8080/AltoroJ/api/login'
+# Verifica si se proporcionan 3 args
+if len(sys.argv) != 3:
+    print("Para usar el programa debes introducir 3 argumentos: python3 script.py <host> <port>")
+    sys.exit(1)
+
+
+host = sys.argv[1]
+port = sys.argv[2]
+
+url = 'http://' + host + ':' + port + '/AltoroJ/api/login'
 session = requests.Session()
 
 username = input("Enter username\n")
